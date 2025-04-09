@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Timeout: 20
+    Environment:
+      Variables:
+        AWS_SES_ACCESS_KEY_ID: !Ref SesAccessKeyId
+        AWS_SES_SECRET_ACCESS_KEY: !Ref SesSecretAccessKey
+        AWS_SES_REGION: !Ref  SesRegion
+        DB_HOST: !Ref DbHost
+        DB_USER: !Ref DbUser
+        DB_PASSWORD: !Ref DbPassword
+        DB_DATABASE: !Ref DbDatabase
+        COIN_GEKO_API_KEY: !Ref CoinGekoApiKey
+
+Parameters:
+  SesAccessKeyId:
+    Type: String
+  SesSecretAccessKey:
+    Type: String
+  SesRegion:
+    Type: String
+  DbHost:
+    Type: String
+  DbUser:
+    Type: String
+  DbPassword:
+    Type: String
+  DbDatabase:
+    Type: String
+  CoinGekoApiKey:
+    Type: String
+
+Resources:
+  GetCryptoPriceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      FunctionName: GetCryptoPriceFunction
+      Handler: src/main.fetchCryptoDetail
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Timeout: 10
+      Events:
+        ApiEvent:
+          Type: Api
+          RestApiId: !Ref ApiGateway
+          StageName: dev
+          Properties:
+            Path: /crypto-price
+            Method: POST
+
+  GetCryptoListFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      FunctionName: GetCryptoListFunction
+      Handler: src/main.fetchCryptoList
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Timeout: 10
+      Events:
+        ApiEvent:
+          Type: Api
+          RestApiId: !Ref ApiGateway
+          StageName: dev
+          Properties:
+            Path: /crypto-list
+            Method: POST
+
+Outputs:
+  CryptoPriceApiEndpoint:
+    Description: "API Gateway endpoint URL for GetCryptoPriceFunction"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/dev/crypto-price"
+
+  CryptoListFunction:
+    Description: "API Gateway endpoint URL for GetCryptoPriceFunction"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/dev/crypto-list"

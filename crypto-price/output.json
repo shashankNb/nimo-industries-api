@@ -1,0 +1,1 @@
+{"errorType":"TypeError","errorMessage":"Cannot destructure property 'cryptoId' of 'event.body' as it is undefined.","trace":["TypeError: Cannot destructure property 'cryptoId' of 'event.body' as it is undefined.","    at Runtime.fetchCryptoDetail [as handler] (file:///var/task/src/get.js:14:13)","    at Runtime.handleOnceNonStreaming (file:///var/runtime/index.mjs:1173:29)"]}

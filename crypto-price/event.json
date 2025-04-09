@@ -1,0 +1,6 @@
+{
+    "body": {
+        "cryptoId": ["bitcoin", "ethereum"],
+        "email": "test@example.com"
+    }
+}
