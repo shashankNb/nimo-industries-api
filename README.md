@@ -2,7 +2,7 @@
 This project provides serverless APIs for cryptocurrency price tracking and search functionality built on AWS Lambda.
 
 **Note**  
-This application does not use AWS Serverless from ```https://www.serverless.com``` or SST ```https://sst.dev``` which is a wrapper for AWS Lamda to manage everything on its own like creation of API Gateway, functions and deployment. This application was completely made from scratch using NodeJS and AWS SDK and SAM CLI to demonostrate the knowledge of AWS Lamba and different services of AWS Services.  
+This application does not use AWS Serverless from ```https://www.serverless.com``` or SST ```https://sst.dev``` which is a wrapper for AWS Lamda to manage everything on its own like creation of API Gateway, functions and deployment. This application was completely made from scratch using NodeJS and AWS SDK and SAM CLI to demonostrate the knowledge of AWS Lamba and different services of AWS.  
 
 Deployment was also configured manually & CICD pipeline was configured using GithubActions.
 
@@ -28,7 +28,6 @@ nimo-crypto-api/
 │   ├── template.yaml      # AWS SAM template
 │   └── package.json       # Node.js dependencies
 ```
-## Project Structure
 
 ## Services
 
